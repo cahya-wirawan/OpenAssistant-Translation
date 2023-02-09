@@ -3,6 +3,7 @@ import json
 import jsonlines
 from tqdm import tqdm
 
+# Following models are fpr Indonesian Machine Translation. Feel free to update it for your language
 model_name = "Wikidepia/marian-nmt-enid"
 #model_name = "Helsinki-NLP/opus-mt-en-id"
 translator = Translator(model_name, cache_enabled=True)
@@ -12,7 +13,6 @@ with open("oa_v3_fixed_plus_safety.jsonl", "r") as file:
 print("Data length:", len(data))
 ds = []
 for i, row in tqdm(enumerate(data), total=len(data)):
-    # print(".", end="", flush=True)
     if row["meta"]["source"] not in ["synth_code", "conala"]:
         ds.append(
             {
