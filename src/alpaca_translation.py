@@ -14,23 +14,10 @@ print("Data length:", len(data))
 ds = []
 for i, row in tqdm(enumerate(data), total=len(data)):
     if row["meta"]["source"] not in ["synth_code", "conala"]:
-        source = []
-        for i, user in enumerate(row["text"].split("User:")):
-            for j, assistant in enumerate(user.split("Assistant:")):
-                if assistant != "":
-                    print(i, j, assistant)
-                    source.append(assistant)
-        target = translator.translate(source)
-        label = ""
-        for i, t in enumerate(target):
-            if i%2 == 0:
-                label += f"User: {t}\n"
-            else:
-                label += f"Assistant: {t}\n"
         ds.append(
             {
                 "text": row["text"],
-                "label": [label]
+                "label": [translator.translate([row["text"]])[0]]
             }
         )
 with jsonlines.open(f'instruction_id.jsonl', mode='w') as writer:
