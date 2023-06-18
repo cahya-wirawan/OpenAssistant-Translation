@@ -5,6 +5,7 @@ languages = ['ar', 'bg', 'bn', 'ca', 'de', 'el', 'en', 'es', 'et', 'fi', 'fr', '
 """
 languages = ['bg', 'bn', 'ca', 'de', 'en', 'es', 'et', 'fi', 'fr', 'hi', 'ht',
              'id', 'it', 'ja', 'ms', 'pt', 'ru', 'sw', 'ta', 'th', 'tr', 'vi', 'zh']
+# lang = "bg,bn,ca,de,en,es,et,fi,fr,hi,ht,id,it,ja,ms,pt,ru,sw,ta,th,tr,vi,zh"
 
 def main():
     ds_all = None
