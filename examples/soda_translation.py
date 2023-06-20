@@ -34,7 +34,6 @@ def main():
     translator = OpenTranslation(model_name, cache_enabled=True, cache_name=args.cache_name)
     dataset = load_dataset("allenai/soda")
     soda_keys = ["head", "tail", "literal", "narrative", "dialogue"]
-    soda_translation = []
     with jsonlines.open(args.output, "w") as jsonl:
         # for i, row in tqdm(enumerate(dataset["train"]), total=len(dataset["train"])):
         for i in tqdm(range(args.start, args.end), total=args.end-args.start):
@@ -47,7 +46,11 @@ def main():
                     source += row[sk]
                 else:
                     source.append(row[sk])
-            target = translator.translate(source)
+            try:
+                target = translator.translate(source)
+            except IndexError as error:
+                print(i, error)
+                continue
             translation = {}
             for j, sk in enumerate(soda_keys):
                 if sk == "dialogue":
@@ -57,7 +60,6 @@ def main():
             for key in dataset["train"].features:
                 if key not in soda_keys:
                     translation[key] = row[key]
-            soda_translation.append(translation)
             jsonl.write(translation)
 
 
