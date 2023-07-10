@@ -32,7 +32,7 @@ def main():
                         help="The cache name")
     parser.add_argument("-o", "--output", type=str, required=False, default="orca_id.jsonl",
                         help="The output file")
-    parser.add_argument("-d", "--debug", type=bool, required=False, default=False,
+    parser.add_argument("-d", "--debug", action='store_true', required=False, default=False,
                         help="Debug mode")
     args = parser.parse_args()
 
