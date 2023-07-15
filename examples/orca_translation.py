@@ -63,6 +63,9 @@ def main():
             except IndexError as error:
                 print(i, error)
                 continue
+            except KeyError as error:
+                print(i, error)
+                continue
             for j, text in enumerate(source):
                 found = re.search(r"^(\s+)", text)
                 if found:

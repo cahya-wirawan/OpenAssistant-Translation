@@ -175,6 +175,7 @@ class OpenTranslation:
 
     @staticmethod
     def clean(text):
+        text = text.replace("`", "'")
         text = text.strip()
         text = re.sub(r"\s{2,}", " ", text)
         text = re.sub(r"[\r\n\t]+", " ", text)
